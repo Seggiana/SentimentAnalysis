@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111"
+      fx:controller="sample.MLMController" alignment="CENTER">
+    <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+        <padding>
+            <Insets top="25" right="25" bottom="10" left="25"/>
+        </padding>
+        <Label fx:id="tab1_label_showText" text="Select file to test the dictionary"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Button fx:id="tab1_button_choose" onAction="#handleSubmit" text="Select file"  GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="label_cm" text="Confusion matrix:" visible="false"  GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="label_accuracy" text="Accuracy:" visible="false"  GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    </GridPane>
+</VBox>

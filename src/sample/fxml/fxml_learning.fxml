@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111"
+      fx:controller="sample.LearningController" alignment="CENTER">
+<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+          styleClass="root">
+    <Label fx:id="tab1_label_showText" text="Select file to test the dictionary"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <Button fx:id="tab1_button_choose" onAction="#chooseFile" text="Select file"  GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <Label fx:id="label_cmA" text="Confusion matrix:" visible="false"  GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <Label fx:id="label_accuracyA" text="Accuracy:" visible="false"  GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <Label fx:id="label_cmL" text="Confusion matrix:" visible="false"  GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <Label fx:id="label_accuracyL" text="Accuracy:" visible="false"  GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+
+</GridPane>
+</VBox>
