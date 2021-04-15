@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LearningController {
+    public Button tab1_button_choose;
     @FXML
     private Label tab1_label_showText;
     @FXML
@@ -48,7 +50,7 @@ public class LearningController {
         cmAFINN.clear();
         cmLexicon.clear();
         try (BufferedReader br = Files.newBufferedReader(Paths.get(file.getAbsolutePath()),
-                StandardCharsets.US_ASCII)) {
+                StandardCharsets.UTF_8)) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(";");
@@ -57,7 +59,6 @@ public class LearningController {
             }
         } catch (IOException ignored) {
         }
-        System.out.println(listOfRecords.size());
     }
 
     private Record fillTheRecord(String[] values, int i) {
