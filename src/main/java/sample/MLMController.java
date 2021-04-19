@@ -62,12 +62,12 @@ public class MLMController {
         loader.setFile(new File(desFilePath));
         data = loader.getDataSet();
         data.setClassIndex(1);
-        attributes = new ArrayList<Attribute>();
-        ArrayList<Boolean> classVal = new ArrayList<Boolean>();
+        attributes = new ArrayList<>();
+        ArrayList<Boolean> classVal = new ArrayList<>();
         attributes.add(new Attribute("text", (ArrayList<String>) null));
         attributes.add(new Attribute("sentiment", String.valueOf(classVal)));
-        train = data.trainCV(3, 0);
-        test = data.testCV(3, 0);
+        train = new Instances(data, 0, (int) (data.numInstances() * 0.7));
+        test = new Instances(data, (int) (data.numInstances() * 0.7) + 1, (int) (data.numInstances() * 0.3));
         train.setClassIndex(1);
         test.setClassIndex(1);
     }
@@ -103,7 +103,7 @@ public class MLMController {
         System.out.println(eval.toSummaryString());
         System.out.println(eval.toMatrixString());
         label_cm.setText(eval.toMatrixString());
-        label_accuracy.setText("Accuracy: " + eval.correct() / (eval.incorrect() + eval.correct()));
+        label_accuracy.setText("Naive Bayes Classifier Accuracy: " + eval.correct() / (eval.incorrect() + eval.correct()));
         label_accuracy.setVisible(true);
         label_cm.setVisible(true);
     }
