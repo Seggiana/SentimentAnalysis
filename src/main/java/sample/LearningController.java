@@ -70,44 +70,18 @@ public class LearningController {
         return r;
     }
 
-    private List<String> textToList(String text) {
+    private ArrayList<String> textToList(String text) {
         String[] s = text.split("[^\\w']+");
         return new ArrayList<>(Arrays.asList(s));
     }
 
     private void analyze() {
         for (Record r : listOfRecords) {
-            r.setPredictionAFINN(calculateValue(r.getWordList(), true));
-            r.setPredictionLexicon(calculateValue(r.getWordList(), false));
+            r.setPredictionAFINN(dictionary.calculateValue(r.getWordList(), true));
+            r.setPredictionLexicon(dictionary.calculateValue(r.getWordList(), false));
         }
         cmAFINN.setcmA(listOfRecords);
         cmLexicon.setcmL(listOfRecords);
-    }
-
-    private boolean calculateValue(List<String> firstParam, boolean isAFINN) {
-        int predictedValue = 0;
-        for (String s : firstParam) {
-            if (isAFINN) {
-                if (dictionary.getDictionaryAFINN().containsKey(s)) {
-                    if ((firstParam.indexOf(s) - 1) != -1 &&
-                            dictionary.isNegative(firstParam.get(firstParam.indexOf(s) - 1))) {
-                        predictedValue -= dictionary.getDictionaryAFINN().get(s);
-                    } else {
-                        predictedValue += dictionary.getDictionaryAFINN().get(s);
-                    }
-                }
-            } else {
-                if (dictionary.getDictionaryLexicon().containsKey(s)) {
-                    if ((firstParam.indexOf(s) - 1) != -1 &&
-                            dictionary.isNegative(firstParam.get(firstParam.indexOf(s) - 1))) {
-                        predictedValue -= dictionary.getDictionaryLexicon().get(s);
-                    } else {
-                        predictedValue += dictionary.getDictionaryLexicon().get(s);
-                    }
-                }
-            }
-        }
-        return predictedValue >= 0;
     }
 
     public void setDictionary(Dictionary dictionary) {

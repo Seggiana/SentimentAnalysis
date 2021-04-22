@@ -23,9 +23,17 @@
                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Button text="Submit" onAction="#handleSubmit"
                 GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <Label text="Result:"
+        <Label text="AFINN result:"
                GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <Label fx:id="lbl_result" text="---"
+        <Label fx:id="lbl_result_AFINN" text="---"
                GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Lexicon result:"
+               GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <Label fx:id="lbl_result_Lexicon" text="---"
+               GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Label text="Stanford NLP result:"
+               GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <Label fx:id="lbl_result_SNLP" text="---"
+               GridPane.columnIndex="1" GridPane.rowIndex="5"/>
     </GridPane>
 </VBox>

@@ -33,13 +33,14 @@ public class RootController {
             if (newValue == tab_welcome) {
                 System.out.println("Controller = " + fxml_welcomeController);
             } else if (newValue == tab_testing) {
+                fxml_testingController.setDictionary(dictionary);
                 System.out.println("Controller = " + fxml_testingController);
                 //fxml_testingController.handleSubmit();
             } else if (newValue == tab_learning) {
                 fxml_learningController.setDictionary(dictionary);
                 System.out.println("Controller = " + fxml_learningController);
             } else if (newValue == tab_mlm) {
-                fxml_learningController.setDictionary(dictionary);
+
                 System.out.println("Controller = " + fxml_mlmController);
             } else {
                 System.out.println("- another Tab -");

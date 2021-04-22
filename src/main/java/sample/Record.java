@@ -1,10 +1,12 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Record {
     private int id;
-    private List<String> wordList;
+    private ArrayList<String> wordList;
     private boolean predictionAFINN;
     private boolean predictionLexicon;
     private boolean predictionNLP;
@@ -15,11 +17,11 @@ public class Record {
         this.id = id;
     }
 
-    public List<String> getWordList() {
+    public ArrayList<String> getWordList() {
         return wordList;
     }
 
-    public void setWordList(List<String> wordList) {
+    public void setWordList(ArrayList<String> wordList) {
         this.wordList = wordList;
     }
 
@@ -61,6 +63,8 @@ public class Record {
 
     public void setText(String text) {
         this.text = text;
+        cleanText();
+        wordList = textToList(text);
     }
 
     @Override
@@ -79,5 +83,9 @@ public class Record {
                 .replaceAll("@[\\S]+", "")
                 .replaceAll("#", "")
                 .replaceAll("[\\s]+", " ");
+    }
+    private ArrayList<String> textToList(String text) {
+        String[] s = text.split("[^\\w']+");
+        return new ArrayList<>(Arrays.asList(s));
     }
 }

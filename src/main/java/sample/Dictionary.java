@@ -64,4 +64,30 @@ public class Dictionary {
     }
 
     public Map<String, Integer> getDictionaryLexicon() { return dictionaryLexicon; }
+
+    public boolean calculateValue(List<String> firstParam, boolean isAFINN) {
+        int predictedValue = 0;
+        for (String s : firstParam) {
+            if (isAFINN) {
+                if (dictionaryAFINN.containsKey(s)) {
+                    if ((firstParam.indexOf(s) - 1) != -1 &&
+                            isNegative(firstParam.get(firstParam.indexOf(s) - 1))) {
+                        predictedValue -= dictionaryAFINN.get(s);
+                    } else {
+                        predictedValue += dictionaryAFINN.get(s);
+                    }
+                }
+            } else {
+                if (dictionaryLexicon.containsKey(s)) {
+                    if ((firstParam.indexOf(s) - 1) != -1 &&
+                            isNegative(firstParam.get(firstParam.indexOf(s) - 1))) {
+                        predictedValue -= dictionaryLexicon.get(s);
+                    } else {
+                        predictedValue += dictionaryLexicon.get(s);
+                    }
+                }
+            }
+        }
+        return predictedValue >= 0;
+    }
 }
