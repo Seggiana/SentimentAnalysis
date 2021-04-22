@@ -11,10 +11,10 @@ public class TestingController {
     @FXML
     private TextArea txtA_ToAnalyse;
 
-    public void handleSubmit() {
+    public void handleSubmit() throws Exception {
         lbl_result.setText("Resulted");
         System.out.println(txtA_ToAnalyse.textProperty().getValue());
-    }
 
+    }
 
 }

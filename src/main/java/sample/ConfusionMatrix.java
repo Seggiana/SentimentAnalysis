@@ -32,6 +32,19 @@ public class ConfusionMatrix {
             }
         }
     }
+    public void setcmS(List<Record> listOfRecords) {
+        for (Record r : listOfRecords) {
+            if (r.getPredictedClass() == r.getPredictionNLP() && r.getPredictedClass()) {
+                cm[0][0]++;
+            } else if (r.getPredictedClass() == r.getPredictionNLP() && !r.getPredictedClass()) {
+                cm[1][1]++;
+            } else if (r.getPredictedClass() != r.getPredictionNLP() && r.getPredictedClass()) {
+                cm[0][1]++;
+            } else if (r.getPredictedClass() != r.getPredictionNLP() && !r.getPredictedClass()) {
+                cm[1][0]++;
+            }
+        }
+    }
 
 
     public float countAccuracy() {

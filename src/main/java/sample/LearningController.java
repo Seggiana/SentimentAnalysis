@@ -53,7 +53,7 @@ public class LearningController {
                 StandardCharsets.UTF_8)) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(";");
+                String[] values = line.split(",");
                 listOfRecords.add(fillTheRecord(values, i));
                 i++;
             }
@@ -63,7 +63,9 @@ public class LearningController {
 
     private Record fillTheRecord(String[] values, int i) {
         Record r = new Record(i);
-        r.setText(textToList(values[0]));
+        r.setText(values[0]);
+        r.cleanText();
+        r.setWordList(textToList(r.getText()));
         r.setPredictedClass(Boolean.parseBoolean((values[1])));
         return r;
     }
@@ -75,8 +77,8 @@ public class LearningController {
 
     private void analyze() {
         for (Record r : listOfRecords) {
-            r.setPredictionAFINN(calculateValue(r.getText(), true));
-            r.setPredictionLexicon(calculateValue(r.getText(), false));
+            r.setPredictionAFINN(calculateValue(r.getWordList(), true));
+            r.setPredictionLexicon(calculateValue(r.getWordList(), false));
         }
         cmAFINN.setcmA(listOfRecords);
         cmLexicon.setcmL(listOfRecords);
@@ -94,8 +96,7 @@ public class LearningController {
                         predictedValue += dictionary.getDictionaryAFINN().get(s);
                     }
                 }
-            }
-            else {
+            } else {
                 if (dictionary.getDictionaryLexicon().containsKey(s)) {
                     if ((firstParam.indexOf(s) - 1) != -1 &&
                             dictionary.isNegative(firstParam.get(firstParam.indexOf(s) - 1))) {
@@ -115,12 +116,12 @@ public class LearningController {
 
     private void setLabels() {
         label_cmA.setText("AFINN confusion matrix: \n\t True \t\t False \n True " + cmAFINN.getCm()[0][0] + "\t\t"
-                + cmAFINN.getCm()[0][1] + " \n False " + cmAFINN.getCm()[1][0] + "\t\t" + cmAFINN.getCm()[1][1]);
+                + cmAFINN.getCm()[0][1] + " \n False " + cmAFINN.getCm()[1][0] + "\t\t\t" + cmAFINN.getCm()[1][1]);
         label_cmA.visibleProperty().set(true);
         label_accuracyA.setText("Accuracy: " + cmAFINN.countAccuracy());
         label_accuracyA.visibleProperty().set(true);
         label_cmL.setText("Lexicon confusion matrix: \n\t True \t\t False \n True " + cmLexicon.getCm()[0][0] + "\t\t"
-                + cmLexicon.getCm()[0][1] + " \n False " + cmLexicon.getCm()[1][0] + "\t\t" + cmLexicon.getCm()[1][1]);
+                + cmLexicon.getCm()[0][1] + " \n False " + cmLexicon.getCm()[1][0] + "\t\t\t" + cmLexicon.getCm()[1][1]);
         label_cmL.visibleProperty().set(true);
         label_accuracyL.setText("Accuracy: " + cmLexicon.countAccuracy());
         label_accuracyL.visibleProperty().set(true);

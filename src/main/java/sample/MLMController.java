@@ -5,20 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayesMultinomialText;
-import weka.classifiers.meta.FilteredClassifier;
-import weka.core.Attribute;
-import weka.core.Instances;
-import weka.core.converters.ArffLoader;
-import weka.core.converters.CSVLoader;
-import weka.core.tokenizers.NGramTokenizer;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.StringToWordVector;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MLMController {
     @FXML
@@ -26,17 +19,12 @@ public class MLMController {
     @FXML
     public Button tab1_button_choose;
     @FXML
-    public Label label_cm;
+    public Label label_SNLP_cm;
     @FXML
-    public Label label_accuracy;
-    StringToWordVector stringToWordVector;
-    Instances data;
-    String desFilePath = "C:\\Users\\Toshiba\\Desktop\\SEMESTR 10\\MGR\\SentimentAnalysis\\analysis.arff";
-    Evaluation eval;
-    FilteredClassifier filteredClassifier;
-    ArrayList<Attribute> attributes;
-    Instances train;
-    Instances test;
+    public Label label_SNLP_accuracy;
+    ArrayList<String> tweets;
+    List<Record> recordList = new ArrayList<>();
+    ConfusionMatrix cmS;
 
     @FXML
     public void handleSubmit() throws Exception {
@@ -45,67 +33,54 @@ public class MLMController {
         fileChooser.setInitialDirectory(new File(Paths.get("..").
                 toAbsolutePath().normalize().toString()));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-        Convert(selectedFile.getAbsolutePath(), desFilePath);
-        setData();
-        initializeFilter();
-        stringToWordVector.setInputFormat(data);
-        train = Filter.useFilter(train, stringToWordVector);
-        test = Filter.useFilter(test, stringToWordVector);
-        filteredClassifier.buildClassifier(train);
-        eval = new Evaluation(test);
-        eval.evaluateModel(filteredClassifier, test);
+
+        tab1_label_showText.setText("Processing Stanford Classifier");
+        NLP.init();
+        initTweets(selectedFile.getAbsolutePath());
+        tab1_label_showText.setText("Select file to process");
+        cmS = new ConfusionMatrix();
+        cmS.setcmS(recordList);
         printSummary();
     }
 
-    private void setData() throws IOException {
-        ArffLoader loader = new ArffLoader();
-        loader.setFile(new File(desFilePath));
-        data = loader.getDataSet();
-        data.setClassIndex(1);
-        attributes = new ArrayList<>();
-        ArrayList<Boolean> classVal = new ArrayList<>();
-        attributes.add(new Attribute("text", (ArrayList<String>) null));
-        attributes.add(new Attribute("sentiment", String.valueOf(classVal)));
-        train = new Instances(data, 0, (int) (data.numInstances() * 0.7));
-        test = new Instances(data, (int) (data.numInstances() * 0.7) + 1, (int) (data.numInstances() * 0.3));
-        train.setClassIndex(1);
-        test.setClassIndex(1);
+
+    private void initTweets(String absolutePath) {
+        csvToList(new File(absolutePath));
+        for (Record r : recordList) {
+            r.cleanText();
+            r.setPredictionNLP(NLP.findSentiment(r.getText()) >= 2);
+        }
     }
 
-    public static void Convert(String sourcePath, String destPath) throws Exception {
-        CSVLoader loader = new CSVLoader();
-        loader.setSource(new File(sourcePath));
-        Instances data = loader.getDataSet();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(destPath));
-        writer.write(data.toString());
-        writer.flush();
-        writer.close();
+    private void csvToList(File file) {
+        int i = 0;
+        tweets = new ArrayList<>();
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(file.getAbsolutePath()),
+                StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                tweets.add(values[0]);
+                recordList.add(fillTheRecord(values, i));
+                i++;
+            }
+        } catch (IOException ignored) {
+        }
     }
 
-    private void initializeFilter() {
-        filteredClassifier = new FilteredClassifier();
-        filteredClassifier.setClassifier(new NaiveBayesMultinomialText());
-        stringToWordVector = new StringToWordVector();
-        stringToWordVector.setLowerCaseTokens(true);
-        stringToWordVector.setMinTermFreq(1);
-        stringToWordVector.setTFTransform(false);
-        stringToWordVector.setIDFTransform(false);
-        stringToWordVector.setWordsToKeep(1000);
-        NGramTokenizer tokenizer = new NGramTokenizer();
-        tokenizer.setNGramMinSize(2);
-        tokenizer.setNGramMaxSize(5);
-        stringToWordVector.setTokenizer(tokenizer);
-        stringToWordVector.setAttributeIndices("first");
-        filteredClassifier.setFilter(stringToWordVector);
+    private Record fillTheRecord(String[] values, int i) {
+        Record r = new Record(i);
+        r.setText(values[0]);
+        r.setPredictedClass(Boolean.parseBoolean((values[1])));
+        return r;
     }
 
-    private void printSummary() throws Exception {
-        System.out.println(eval.toSummaryString());
-        System.out.println(eval.toMatrixString());
-        label_cm.setText(eval.toMatrixString());
-        label_accuracy.setText("Naive Bayes Classifier Accuracy: " + eval.correct() / (eval.incorrect() + eval.correct()));
-        label_accuracy.setVisible(true);
-        label_cm.setVisible(true);
+    private void printSummary() {
+        label_SNLP_cm.setText("NLP confusion matrix: \n\t True \t\t False \n True " + cmS.getCm()[0][0] + "\t\t"
+                + cmS.getCm()[0][1] + " \n False " + cmS.getCm()[1][0] + "\t\t\t" + cmS.getCm()[1][1]);
+        label_SNLP_cm.setVisible(true);
+        label_SNLP_accuracy.setText("Stanford NLP classifier accuracy: " + cmS.countAccuracy());
+        label_SNLP_accuracy.setVisible(true);
     }
 
 }
