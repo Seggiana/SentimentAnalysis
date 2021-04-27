@@ -53,7 +53,6 @@ public class DL4JNLP {
         readModel();
     }
 
-
     public void readModel() throws IOException {
         String DATA_PATH = new File(dataLocalPath, "LabelledNews").getAbsolutePath();
         NewsIterator iTrain = new NewsIterator.Builder()
@@ -180,5 +179,9 @@ public class DL4JNLP {
 
     public ConfusionMatrix getCon() {
         return con;
+    }
+
+    public Word2Vec getWord2Vec() {
+        return word2Vec;
     }
 }

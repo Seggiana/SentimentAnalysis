@@ -34,5 +34,9 @@
                GridPane.columnIndex="0" GridPane.rowIndex="5"/>
         <Label fx:id="lbl_result_SNLP" text="---"
                GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        <Label text="DL4J NLP result:"
+               GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <Label fx:id="lbl_result_DL4J" text="---"
+               GridPane.columnIndex="1" GridPane.rowIndex="6"/>
     </GridPane>
 </VBox>

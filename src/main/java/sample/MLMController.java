@@ -29,6 +29,7 @@ public class MLMController {
     ArrayList<String> tweets;
     ArrayList<Record> recordList = new ArrayList<>();
     ConfusionMatrix cmS;
+    private DL4JNLP dl4JNLP;
 
     @FXML
     public void handleSubmit() throws Exception {
@@ -45,7 +46,7 @@ public class MLMController {
         cmS = new ConfusionMatrix();
         cmS.setcmS(recordList);
         printSummary();
-        DL4JNLP dl4JNLP = new DL4JNLP();
+        dl4JNLP = new DL4JNLP();
         dl4JNLP.init(recordList);
         ConfusionMatrix conf = dl4JNLP.con;
         label_DL4j_NLP_cm.setText("NLP confusion matrix: \n\t True \t\t False \n True " + conf.getCm()[0][0] + "\t\t\t"
@@ -94,4 +95,7 @@ public class MLMController {
         label_SNLP_accuracy.setVisible(true);
     }
 
+    public DL4JNLP getDl4JNLP() {
+        return dl4JNLP;
+    }
 }
