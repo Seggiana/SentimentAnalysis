@@ -11,7 +11,7 @@
         <Tab fx:id="tab_learning" text="Dictionary Method">
             <fx:include fx:id="fxml_learning" source="fxml_learning.fxml"/>
         </Tab>
-        <Tab fx:id="tab_mlm" text="Machine Learning Methods">
+        <Tab fx:id="tab_mlm" text="NLP Methods">
             <fx:include fx:id="fxml_mlm" source="fxml_mlm.fxml"/>
         </Tab>
         <Tab fx:id="tab_testing" text="Testing">

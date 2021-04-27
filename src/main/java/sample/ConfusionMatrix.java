@@ -7,13 +7,13 @@ public class ConfusionMatrix {
 
     public void setcmA(List<Record> listOfRecords) {
         for (Record r : listOfRecords) {
-            if (r.getPredictedClass() == r.getPredictionAFINN() && r.getPredictedClass()) {
+            if (r.getTextClass() == r.getPredictionAFINN() && r.getTextClass()) {
                 cm[0][0]++;
-            } else if (r.getPredictedClass() == r.getPredictionAFINN() && !r.getPredictedClass()) {
+            } else if (r.getTextClass() == r.getPredictionAFINN() && !r.getTextClass()) {
                 cm[1][1]++;
-            } else if (r.getPredictedClass() != r.getPredictionAFINN() && r.getPredictedClass()) {
+            } else if (r.getTextClass() != r.getPredictionAFINN() && r.getTextClass()) {
                 cm[0][1]++;
-            } else if (r.getPredictedClass() != r.getPredictionAFINN() && !r.getPredictedClass()) {
+            } else if (r.getTextClass() != r.getPredictionAFINN() && !r.getTextClass()) {
                 cm[1][0]++;
             }
         }
@@ -21,29 +21,37 @@ public class ConfusionMatrix {
 
     public void setcmL(List<Record> listOfRecords) {
         for (Record r : listOfRecords) {
-            if (r.getPredictedClass() == r.getPredictionLexicon() && r.getPredictedClass()) {
+            if (r.getTextClass() == r.getPredictionLexicon() && r.getTextClass()) {
                 cm[0][0]++;
-            } else if (r.getPredictedClass() == r.getPredictionLexicon() && !r.getPredictedClass()) {
+            } else if (r.getTextClass() == r.getPredictionLexicon() && !r.getTextClass()) {
                 cm[1][1]++;
-            } else if (r.getPredictedClass() != r.getPredictionLexicon() && r.getPredictedClass()) {
+            } else if (r.getTextClass() != r.getPredictionLexicon() && r.getTextClass()) {
                 cm[0][1]++;
-            } else if (r.getPredictedClass() != r.getPredictionLexicon() && !r.getPredictedClass()) {
+            } else if (r.getTextClass() != r.getPredictionLexicon() && !r.getTextClass()) {
                 cm[1][0]++;
             }
         }
     }
+
     public void setcmS(List<Record> listOfRecords) {
         for (Record r : listOfRecords) {
-            if (r.getPredictedClass() == r.getPredictionNLP() && r.getPredictedClass()) {
+            if (r.getTextClass() == r.getPredictionNLP() && r.getTextClass()) {
                 cm[0][0]++;
-            } else if (r.getPredictedClass() == r.getPredictionNLP() && !r.getPredictedClass()) {
+            } else if (r.getTextClass() == r.getPredictionNLP() && !r.getTextClass()) {
                 cm[1][1]++;
-            } else if (r.getPredictedClass() != r.getPredictionNLP() && r.getPredictedClass()) {
+            } else if (r.getTextClass() != r.getPredictionNLP() && r.getTextClass()) {
                 cm[0][1]++;
-            } else if (r.getPredictedClass() != r.getPredictionNLP() && !r.getPredictedClass()) {
+            } else if (r.getTextClass() != r.getPredictionNLP() && !r.getTextClass()) {
                 cm[1][0]++;
             }
         }
+    }
+
+    public void setcmD(int first, int second, int third, int fourth) {
+        cm[0][0] = first;
+        cm[0][1] = second;
+        cm[1][0] = third;
+        cm[1][1] = fourth;
     }
 
 
@@ -60,5 +68,12 @@ public class ConfusionMatrix {
         cm[0][1] = 0;
         cm[1][0] = 0;
         cm[1][1] = 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfusionMatrix{" +
+                "cm=" + cm[0][0] + ", " + cm[0][1] + ", " + cm[1][0] + ", " + cm[1][1] +
+                '}';
     }
 }

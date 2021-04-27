@@ -21,5 +21,9 @@
                GridPane.rowIndex="2"/>
         <Label fx:id="label_SNLP_accuracy" text="Accuracy:" visible="false" GridPane.columnIndex="0"
                GridPane.rowIndex="3"/>
+        <Label fx:id="label_DL4j_NLP_cm" text="Confusion matrix:" visible="false" GridPane.columnIndex="0"
+               GridPane.rowIndex="4"/>
+        <Label fx:id="label_DL4j_NLP_accuracy" text="Accuracy:" visible="false" GridPane.columnIndex="0"
+               GridPane.rowIndex="5"/>
     </GridPane>
 </VBox>

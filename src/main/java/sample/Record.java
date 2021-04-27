@@ -2,7 +2,6 @@ package sample;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Record {
     private int id;
@@ -10,7 +9,7 @@ public class Record {
     private boolean predictionAFINN;
     private boolean predictionLexicon;
     private boolean predictionNLP;
-    private boolean predictedClass;
+    private boolean textClass;
     private String text;
 
     public Record(int id) {
@@ -33,12 +32,12 @@ public class Record {
         this.predictionAFINN = predictionAFINN;
     }
 
-    public boolean getPredictedClass() {
-        return predictedClass;
+    public boolean getTextClass() {
+        return textClass;
     }
 
-    public void setPredictedClass(boolean predictedClass) {
-        this.predictedClass = predictedClass;
+    public void setTextClass(boolean textClass) {
+        this.textClass = textClass;
     }
 
     public boolean getPredictionLexicon() {
@@ -74,7 +73,7 @@ public class Record {
                 ", Text=" + wordList +
                 ", AFINN prediction=" + predictionAFINN +
                 ", Lexicon prediction=" + predictionLexicon +
-                ", Predicted Class=" + predictedClass +
+                ", Predicted Class=" + textClass +
                 '}';
     }
 
@@ -84,6 +83,7 @@ public class Record {
                 .replaceAll("#", "")
                 .replaceAll("[\\s]+", " ");
     }
+
     private ArrayList<String> textToList(String text) {
         String[] s = text.split("[^\\w']+");
         return new ArrayList<>(Arrays.asList(s));

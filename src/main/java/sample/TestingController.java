@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 
 public class TestingController {
     @FXML
@@ -29,9 +28,11 @@ public class TestingController {
         r.setText(textToTest);
         r.setPredictionAFINN(dictionary.calculateValue(r.getWordList(), true));
         r.setPredictionLexicon(dictionary.calculateValue(r.getWordList(), false));
-        NLP.init();
-        r.setPredictionNLP(NLP.findSentiment(r.getText()) >= 2);
+        CoreNLP.init();
+        r.setPredictionNLP(CoreNLP.findSentiment(r.getText()) >= 2);
         printResults();
+
+
     }
 
     public void setDictionary(Dictionary dictionary) {

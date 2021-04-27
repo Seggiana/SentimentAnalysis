@@ -20,14 +20,12 @@ public class Main extends Application {
         scene.setRoot(loader.load());
         RootController controller = loader.getController();
         controller.init();
-
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(640);
+        primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(400);
         primaryStage.setTitle("Sentiment Analysis");
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

@@ -11,7 +11,7 @@ import edu.stanford.nlp.util.CoreMap;
 import java.io.*;
 import java.util.Properties;
 
-public class NLP {
+public class CoreNLP {
     static StanfordCoreNLP pipeline;
 
     public static void init() throws FileNotFoundException {

@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MLMController {
     @FXML
@@ -21,9 +20,14 @@ public class MLMController {
     @FXML
     public Label label_SNLP_cm;
     @FXML
+    public Label label_DL4j_NLP_cm;
+    @FXML
+    public Label label_DL4j_NLP_accuracy;
+    @FXML
     public Label label_SNLP_accuracy;
+
     ArrayList<String> tweets;
-    List<Record> recordList = new ArrayList<>();
+    ArrayList<Record> recordList = new ArrayList<>();
     ConfusionMatrix cmS;
 
     @FXML
@@ -35,20 +39,27 @@ public class MLMController {
         File selectedFile = fileChooser.showOpenDialog(new Stage());
 
         tab1_label_showText.setText("Processing Stanford Classifier");
-        NLP.init();
+        CoreNLP.init();
         initTweets(selectedFile.getAbsolutePath());
         tab1_label_showText.setText("Select file to process");
         cmS = new ConfusionMatrix();
         cmS.setcmS(recordList);
         printSummary();
+        DL4JNLP dl4JNLP = new DL4JNLP();
+        dl4JNLP.init(recordList);
+        ConfusionMatrix conf = dl4JNLP.con;
+        label_DL4j_NLP_cm.setText("NLP confusion matrix: \n\t True \t\t False \n True " + conf.getCm()[0][0] + "\t\t\t"
+                + conf.getCm()[0][1] + " \n False " + conf.getCm()[1][0] + "\t\t\t" + conf.getCm()[1][1]);
+        label_DL4j_NLP_cm.setVisible(true);
+        label_DL4j_NLP_accuracy.setText("DL4J Accuracy: " + dl4JNLP.getAccuracy());
+        label_DL4j_NLP_accuracy.setVisible(true);
     }
-
 
     private void initTweets(String absolutePath) {
         csvToList(new File(absolutePath));
         for (Record r : recordList) {
             r.cleanText();
-            r.setPredictionNLP(NLP.findSentiment(r.getText()) >= 2);
+            r.setPredictionNLP(CoreNLP.findSentiment(r.getText()) >= 2);
         }
     }
 
@@ -71,12 +82,12 @@ public class MLMController {
     private Record fillTheRecord(String[] values, int i) {
         Record r = new Record(i);
         r.setText(values[0]);
-        r.setPredictedClass(Boolean.parseBoolean((values[1])));
+        r.setTextClass(Boolean.parseBoolean((values[1])));
         return r;
     }
 
     private void printSummary() {
-        label_SNLP_cm.setText("NLP confusion matrix: \n\t True \t\t False \n True " + cmS.getCm()[0][0] + "\t\t"
+        label_SNLP_cm.setText("NLP confusion matrix: \n\t True \t\t False \n True " + cmS.getCm()[0][0] + "\t\t\t"
                 + cmS.getCm()[0][1] + " \n False " + cmS.getCm()[1][0] + "\t\t\t" + cmS.getCm()[1][1]);
         label_SNLP_cm.setVisible(true);
         label_SNLP_accuracy.setText("Stanford NLP classifier accuracy: " + cmS.countAccuracy());

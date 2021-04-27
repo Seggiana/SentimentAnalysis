@@ -14,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class LearningController {
     public Button tab1_button_choose;
@@ -66,7 +65,7 @@ public class LearningController {
         r.setText(values[0]);
         r.cleanText();
         r.setWordList(textToList(r.getText()));
-        r.setPredictedClass(Boolean.parseBoolean((values[1])));
+        r.setTextClass(Boolean.parseBoolean((values[1])));
         return r;
     }
 
