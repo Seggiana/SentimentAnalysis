@@ -33,6 +33,7 @@ public class RootController {
         tabPane.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> observable,
                                                                         Tab oldValue, Tab newValue) -> {
             if (newValue == tab_welcome) {
+                fxml_welcomeController.init();
                 System.out.println("Controller = " + fxml_welcomeController);
             } else if (newValue == tab_testing) {
                 //word2Vector = fxml_mlmController.getDl4JNLP().getWord2Vec();
