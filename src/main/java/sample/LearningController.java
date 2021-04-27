@@ -3,6 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -33,6 +34,15 @@ public class LearningController {
     private ConfusionMatrix cmAFINN = new ConfusionMatrix();
     private ConfusionMatrix cmLexicon = new ConfusionMatrix();
 
+    public void init(){
+        Font font = new Font("Times New Roman", 14);
+        tab1_label_showText.setFont(font);
+        tab1_button_choose.setFont(font);
+        label_cmA.setFont(font);
+        label_cmL.setFont(font);
+        label_accuracyA.setFont(font);
+        label_accuracyL.setFont(font);
+    }
     public void chooseFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(Paths.get("..").
@@ -88,13 +98,13 @@ public class LearningController {
     }
 
     private void setLabels() {
-        label_cmA.setText("AFINN confusion matrix: \n\t True \t\t False \n True " + cmAFINN.getCm()[0][0] + "\t\t"
-                + cmAFINN.getCm()[0][1] + " \n False " + cmAFINN.getCm()[1][0] + "\t\t\t" + cmAFINN.getCm()[1][1]);
+        label_cmA.setText("Macierz pomyłek AFINN: \n\t True \t\t False \n True " + cmAFINN.getCm()[0][0] + "\t\t"
+                + cmAFINN.getCm()[0][1] + " \n False " + cmAFINN.getCm()[1][0] + "\t\t" + cmAFINN.getCm()[1][1]);
         label_cmA.visibleProperty().set(true);
         label_accuracyA.setText("Accuracy: " + cmAFINN.countAccuracy());
         label_accuracyA.visibleProperty().set(true);
-        label_cmL.setText("Lexicon confusion matrix: \n\t True \t\t False \n True " + cmLexicon.getCm()[0][0] + "\t\t"
-                + cmLexicon.getCm()[0][1] + " \n False " + cmLexicon.getCm()[1][0] + "\t\t\t" + cmLexicon.getCm()[1][1]);
+        label_cmL.setText("Macierz pomyłek Lexicon: \n\t True \t\t False \n True " + cmLexicon.getCm()[0][0] + "\t\t"
+                + cmLexicon.getCm()[0][1] + " \n False " + cmLexicon.getCm()[1][0] + "\t\t" + cmLexicon.getCm()[1][1]);
         label_cmL.visibleProperty().set(true);
         label_accuracyL.setText("Accuracy: " + cmLexicon.countAccuracy());
         label_accuracyL.visibleProperty().set(true);

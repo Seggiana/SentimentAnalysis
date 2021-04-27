@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextArea?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111"
       fx:controller="sample.TestingController" alignment="CENTER">
@@ -13,28 +12,28 @@
         <padding>
             <Insets top="25" right="25" bottom="10" left="25"/>
         </padding>
-        <Text text="Write analysed text and click 'Submit' "
-              GridPane.columnIndex="0" GridPane.rowIndex="0"
-              GridPane.columnSpan="2"/>
-        <Label text="Input:"
+        <Label fx:id="lbl_info" text="Napisz tekst do przetestowania i kliknij 'Testuj' "
+               GridPane.columnIndex="0" GridPane.rowIndex="0"
+               GridPane.columnSpan="2"/>
+        <Label fx:id="lbl_input" text="Wejście:"
                GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextArea fx:id="txtA_ToAnalyse" minWidth="200" minHeight="100"
+        <TextArea fx:id="txtA_ToAnalyse" prefHeight="100" prefWidth="300"
                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <Button text="Submit" onAction="#handleSubmit"
+        <Button fx:id="btn_submit" text="Testuj" onAction="#handleSubmit"
                 GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <Label text="AFINN result:"
+        <Label fx:id="lbl_res_AFINN" text="AFINN:"
                GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <Label fx:id="lbl_result_AFINN" text="---"
                GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <Label text="Lexicon result:"
+        <Label fx:id="lbl_res_Lexi" text="Wynik Lexicon:"
                GridPane.columnIndex="0" GridPane.rowIndex="4"/>
         <Label fx:id="lbl_result_Lexicon" text="---"
                GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-        <Label text="Stanford NLP result:"
+        <Label fx:id="lbl_res_Stan" text="Wynik Stanford NLP:"
                GridPane.columnIndex="0" GridPane.rowIndex="5"/>
         <Label fx:id="lbl_result_SNLP" text="---"
                GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-        <Label text="DL4J NLP result:"
+        <Label fx:id="lbl_res_DL4J" text="Wynik DL4J NLP:"
                GridPane.columnIndex="0" GridPane.rowIndex="6"/>
         <Label fx:id="lbl_result_DL4J" text="---"
                GridPane.columnIndex="1" GridPane.rowIndex="6"/>

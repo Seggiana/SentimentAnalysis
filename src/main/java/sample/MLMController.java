@@ -3,6 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -33,7 +34,6 @@ public class MLMController {
 
     @FXML
     public void handleSubmit() throws Exception {
-        tab1_label_showText.setText("Resulted");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(Paths.get("..").
                 toAbsolutePath().normalize().toString()));
@@ -42,17 +42,16 @@ public class MLMController {
         tab1_label_showText.setText("Processing Stanford Classifier");
         CoreNLP.init();
         initTweets(selectedFile.getAbsolutePath());
-        tab1_label_showText.setText("Select file to process");
         cmS = new ConfusionMatrix();
         cmS.setcmS(recordList);
         printSummary();
         dl4JNLP = new DL4JNLP();
         dl4JNLP.init(recordList);
         ConfusionMatrix conf = dl4JNLP.con;
-        label_DL4j_NLP_cm.setText("NLP confusion matrix: \n\t True \t\t False \n True " + conf.getCm()[0][0] + "\t\t\t"
+        label_DL4j_NLP_cm.setText("Macierz pomyłek DL4J: \n\t True \t\t False \n True " + conf.getCm()[0][0] + "\t\t\t"
                 + conf.getCm()[0][1] + " \n False " + conf.getCm()[1][0] + "\t\t\t" + conf.getCm()[1][1]);
         label_DL4j_NLP_cm.setVisible(true);
-        label_DL4j_NLP_accuracy.setText("DL4J Accuracy: " + dl4JNLP.getAccuracy());
+        label_DL4j_NLP_accuracy.setText("DL4J accuracy: " + dl4JNLP.getAccuracy());
         label_DL4j_NLP_accuracy.setVisible(true);
     }
 
@@ -88,14 +87,24 @@ public class MLMController {
     }
 
     private void printSummary() {
-        label_SNLP_cm.setText("NLP confusion matrix: \n\t True \t\t False \n True " + cmS.getCm()[0][0] + "\t\t\t"
+        label_SNLP_cm.setText("Macierz pomyłek Stanford NLP: \n\t True \t\t False \n True " + cmS.getCm()[0][0] + "\t\t\t"
                 + cmS.getCm()[0][1] + " \n False " + cmS.getCm()[1][0] + "\t\t\t" + cmS.getCm()[1][1]);
         label_SNLP_cm.setVisible(true);
-        label_SNLP_accuracy.setText("Stanford NLP classifier accuracy: " + cmS.countAccuracy());
+        label_SNLP_accuracy.setText("Stanford NLP accuracy: " + cmS.countAccuracy());
         label_SNLP_accuracy.setVisible(true);
     }
 
     public DL4JNLP getDl4JNLP() {
         return dl4JNLP;
+    }
+
+    public void init() {
+        Font font = new Font("Times New Roman", 14);
+        tab1_label_showText.setFont(font);
+        tab1_button_choose.setFont(font);
+        label_SNLP_cm.setFont(font);
+        label_DL4j_NLP_cm.setFont(font);
+        label_DL4j_NLP_accuracy.setFont(font);
+        label_SNLP_accuracy.setFont(font);
     }
 }

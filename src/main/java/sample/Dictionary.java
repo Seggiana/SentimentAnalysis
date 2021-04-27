@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Dictionary {
-    private Map<String, Integer> dictionaryAFINN;
-    private Map<String, Integer> dictionaryLexicon;
+    private final Map<String, Integer> dictionaryAFINN;
+    private final Map<String, Integer> dictionaryLexicon;
     private List<String> negativeDictionary;
 
     public Dictionary() {
@@ -58,12 +58,6 @@ public class Dictionary {
     public boolean isNegative(String s) {
         return negativeDictionary.contains(s);
     }
-
-    public Map<String, Integer> getDictionaryAFINN() {
-        return dictionaryAFINN;
-    }
-
-    public Map<String, Integer> getDictionaryLexicon() { return dictionaryLexicon; }
 
     public boolean calculateValue(List<String> firstParam, boolean isAFINN) {
         int predictedValue = 0;

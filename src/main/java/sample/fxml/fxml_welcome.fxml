@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="sample.WelcomeController">
-    <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-        <Label fx:id="lbl_welcome" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+      fx:controller="sample.WelcomeController" alignment="CENTER">
+
+    <GridPane xmlns:fx="http://javafx.com/fxml">
+        <ImageView fx:id="image_logoView" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <image>
+                <Image fx:id="image_logo"
+                       url="https://github.com/Seggiana/SentimentAnalysis/blob/develop/Logo.png?raw=true"/>
+            </image>
+        </ImageView>
+        <GridPane xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10" GridPane.columnIndex="1"
+                  GridPane.rowIndex="1">
+            <Label fx:id="lbl_welcome" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="lbl_instructions" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+        </GridPane>
     </GridPane>
-    <ImageView fitHeight="275.0" fitWidth="603.0" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url=""/>
-        </image>
-    </ImageView>
+    <GridPane xmlns:fx="http://javafx.com/fxml" alignment="BOTTOM_LEFT">
+        <Label text=" " GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label alignment="CENTER" fx:id="lbl_creator" text="Autor: inż. Agnieszka Muszyńska" GridPane.columnIndex="1"
+               GridPane.rowIndex="0"/>
+        <Label alignment="CENTER" fx:id="lbl_promote" text="Promotor: dr. inż. Rafał Kasprzyk" GridPane.columnIndex="1"
+               GridPane.rowIndex="1"/>
+        <Label alignment="CENTER" fx:id="lbl_university" text="Wojskowa Akademia Techniczna"
+               GridPane.columnIndex="1"
+               GridPane.rowIndex="2"/>
+        <Label fx:id="lbl_sect" text="Wydział Cybernetyki" GridPane.columnIndex="1"
+               GridPane.rowIndex="3"/>
+        <Label fx:id="lbl_institute" text="Instytut Systemów Informatycznych" GridPane.columnIndex="1"
+               GridPane.rowIndex="4"/>
+        <Label fx:id="lbl_year" text="2021" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    </GridPane>
 </VBox>

@@ -14,15 +14,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(new StackPane(), 800, 400);
+        Scene scene = new Scene(new StackPane(), 640, 400);
         URL url = new File("src/main/java/sample/fxml/fxml_root.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         scene.setRoot(loader.load());
         RootController controller = loader.getController();
         controller.init();
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(800);
+        primaryStage.setMinWidth(640);
         primaryStage.setMinHeight(400);
+        primaryStage.setMaxWidth(640);
+        primaryStage.setMaxHeight(400);
         primaryStage.setTitle("Sentiment Analysis");
         primaryStage.show();
     }

@@ -1,8 +1,10 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Font;
 import org.deeplearning4j.models.embeddings.wordvectors.WordVectors;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.text.tokenization.tokenizer.preprocessor.CommonPreprocessor;
@@ -20,6 +22,14 @@ import java.util.List;
 
 public class TestingController {
     @FXML
+    public Label lbl_res_AFINN;
+    @FXML
+    public Label lbl_res_Lexi;
+    @FXML
+    public Label lbl_res_Stan;
+    @FXML
+    public Label lbl_res_DL4J;
+    @FXML
     private Label lbl_result_AFINN;
     @FXML
     private Label lbl_result_Lexicon;
@@ -27,6 +37,12 @@ public class TestingController {
     private Label lbl_result_SNLP;
     @FXML
     private Label lbl_result_DL4J;
+    @FXML
+    private Label lbl_info;
+    @FXML
+    private Label lbl_input;
+    @FXML
+    private Button btn_submit;
     @FXML
     private TextArea txtA_ToAnalyse;
     private Dictionary dictionary;
@@ -40,7 +56,6 @@ public class TestingController {
         lbl_result_Lexicon.setText("---");
         lbl_result_SNLP.setText("---");
         String textToTest = txtA_ToAnalyse.textProperty().getValue();
-        System.out.println(textToTest);
         r = new Record(0);
         r.setText(textToTest);
         r.setPredictionAFINN(dictionary.calculateValue(r.getWordList(), true));
@@ -142,5 +157,20 @@ public class TestingController {
 
     public void setWord2Vectors(WordVectors word2Vectors) {
         this.word2Vectors = word2Vectors;
+    }
+
+    public void init() {
+        Font font = new Font("Times New Roman", 14);
+        lbl_result_AFINN.setFont(font);
+        lbl_result_Lexicon.setFont(font);
+        lbl_result_SNLP.setFont(font);
+        lbl_result_DL4J.setFont(font);
+        lbl_info.setFont(font);
+        lbl_input.setFont(font);
+        btn_submit.setFont(font);
+        lbl_res_AFINN.setFont(font);
+        lbl_res_Lexi.setFont(font);
+        lbl_res_Stan.setFont(font);
+        lbl_res_DL4J.setFont(font);
     }
 }
