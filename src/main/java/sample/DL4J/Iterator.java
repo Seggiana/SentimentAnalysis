@@ -1,4 +1,4 @@
-package sample;
+package sample.DL4J;
 /* *****************************************************************************
  * Copyright (c) 2020 Konduit K.K.
  * Copyright (c) 2015-2019 Skymind, Inc.
@@ -57,7 +57,7 @@ import static org.nd4j.linalg.indexing.NDArrayIndex.point;
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 //people may want to use this class outside this example. keeping unused methods and public access.
-public class NewsIterator implements DataSetIterator {
+public class Iterator implements DataSetIterator {
     private final WordVectors wordVectors;
     private final int batchSize;
     private final int vectorSize;
@@ -83,12 +83,12 @@ public class NewsIterator implements DataSetIterator {
      *                       - calls populateData function to load news data in categoryData vector
      *                       - also populates labels (i.e. category related inforamtion) in labels class variable
      */
-    private NewsIterator(String dataDirectory,
-                         WordVectors wordVectors,
-                         int batchSize,
-                         int truncateLength,
-                         boolean train,
-                         TokenizerFactory tokenizerFactory) {
+    private Iterator(String dataDirectory,
+                     WordVectors wordVectors,
+                     int batchSize,
+                     int truncateLength,
+                     boolean train,
+                     TokenizerFactory tokenizerFactory) {
         this.dataDirectory = dataDirectory;
         this.batchSize = batchSize;
         this.vectorSize = wordVectors.getWordVector(wordVectors.vocab().wordAtIndex(0)).length;
@@ -328,38 +328,38 @@ public class NewsIterator implements DataSetIterator {
         Builder() {
         }
 
-        public NewsIterator.Builder dataDirectory(String dataDirectory) {
+        public Iterator.Builder dataDirectory(String dataDirectory) {
             this.dataDirectory = dataDirectory;
             return this;
         }
 
-        public NewsIterator.Builder wordVectors(WordVectors wordVectors) {
+        public Iterator.Builder wordVectors(WordVectors wordVectors) {
             this.wordVectors = wordVectors;
             return this;
         }
 
-        public NewsIterator.Builder batchSize(int batchSize) {
+        public Iterator.Builder batchSize(int batchSize) {
             this.batchSize = batchSize;
             return this;
         }
 
-        public NewsIterator.Builder truncateLength(int truncateLength) {
+        public Iterator.Builder truncateLength(int truncateLength) {
             this.truncateLength = truncateLength;
             return this;
         }
 
-        public NewsIterator.Builder train(boolean train) {
+        public Iterator.Builder train(boolean train) {
             this.train = train;
             return this;
         }
 
-        public NewsIterator.Builder tokenizerFactory(TokenizerFactory tokenizerFactory) {
+        public Iterator.Builder tokenizerFactory(TokenizerFactory tokenizerFactory) {
             this.tokenizerFactory = tokenizerFactory;
             return this;
         }
 
-        public NewsIterator build() {
-            return new NewsIterator(dataDirectory,
+        public Iterator build() {
+            return new Iterator(dataDirectory,
                     wordVectors,
                     batchSize,
                     truncateLength,

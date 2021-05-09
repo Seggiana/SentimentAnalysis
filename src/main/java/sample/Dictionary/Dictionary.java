@@ -1,4 +1,4 @@
-package sample;
+package sample.Dictionary;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -81,6 +81,7 @@ public class Dictionary {
                     }
                 }
             }
+
         }
         return predictedValue >= 0;
     }

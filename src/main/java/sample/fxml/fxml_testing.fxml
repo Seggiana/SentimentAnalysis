@@ -7,7 +7,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextArea?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111"
-      fx:controller="sample.TestingController" alignment="CENTER">
+      fx:controller="sample.Testing.TestingController" alignment="CENTER">
     <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
         <padding>
             <Insets top="25" right="25" bottom="10" left="25"/>
@@ -21,7 +21,7 @@
                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Button fx:id="btn_submit" text="Testuj" onAction="#handleSubmit"
                 GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-        <Label fx:id="lbl_res_AFINN" text="AFINN:"
+        <Label fx:id="lbl_res_AFINN" text="Wynik AFINN:"
                GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <Label fx:id="lbl_result_AFINN" text="---"
                GridPane.columnIndex="1" GridPane.rowIndex="3"/>

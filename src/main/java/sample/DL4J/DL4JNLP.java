@@ -1,4 +1,4 @@
-package sample;
+package sample.DL4J;
 
 import org.deeplearning4j.models.word2vec.Word2Vec;
 import org.deeplearning4j.nn.conf.GradientNormalization;
@@ -20,6 +20,8 @@ import org.nd4j.evaluation.classification.Evaluation;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.learning.config.RmsProp;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
+import sample.Dictionary.ConfusionMatrix;
+import sample.Dictionary.Record;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -41,7 +43,7 @@ public class DL4JNLP {
         tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
 
         word2Vec = new Word2Vec.Builder()
-                .minWordFrequency(2)
+                .minWordFrequency(4)
                 .iterations(5)
                 .layerSize(100)
                 .seed(42)
@@ -55,7 +57,7 @@ public class DL4JNLP {
 
     public void readModel() throws IOException {
         String DATA_PATH = new File(dataLocalPath, "LabelledNews").getAbsolutePath();
-        NewsIterator iTrain = new NewsIterator.Builder()
+        Iterator iTrain = new Iterator.Builder()
                 .dataDirectory(DATA_PATH)
                 .wordVectors(word2Vec)
                 .batchSize(50)
@@ -63,7 +65,7 @@ public class DL4JNLP {
                 .tokenizerFactory(tokenizerFactory)
                 .train(true)
                 .build();
-        NewsIterator iTest = new NewsIterator.Builder()
+        Iterator iTest = new Iterator.Builder()
                 .dataDirectory(DATA_PATH)
                 .wordVectors(word2Vec)
                 .batchSize(50)
@@ -77,27 +79,30 @@ public class DL4JNLP {
         tokenizerFactory = new DefaultTokenizerFactory();
         tokenizerFactory.setTokenPreProcessor(new CommonPreprocessor());
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                .updater(new RmsProp(0.0018))
+                .updater(new RmsProp(0.002))
                 .l2(1e-5)
                 .weightInit(WeightInit.XAVIER)
                 .gradientNormalization(GradientNormalization.ClipElementWiseAbsoluteValue).gradientNormalizationThreshold(1.0)
                 .list()
                 .layer(new LSTM.Builder()
                         .nIn(inputNeurons)
-                        .nOut(200)
-                        .activation(Activation.TANH).build())
+                        .nOut(150)
+                        .activation(Activation.HARDTANH).build())
                 .layer(new RnnOutputLayer.Builder()
                         .activation(Activation.SOFTMAX)
                         .lossFunction(LossFunctions.LossFunction.MCXENT)
-                        .nIn(200)
+                        .nIn(150)
                         .nOut(outputs)
                         .build())
                 .build();
         MultiLayerNetwork net = new MultiLayerNetwork(conf);
         net.init();
         net.setListeners(new ScoreIterationListener(1), new EvaluativeListener(iTest, 1, InvocationType.EPOCH_END));
-        net.fit(iTrain, 10);
+        net.fit(iTrain, 5);
         Evaluation eval = net.evaluate(iTest);
+        Evaluation elT = net.evaluate(iTrain);
+        System.out.println(elT.accuracy());
+        System.out.println(elT.confusionMatrix());
 
         con = new ConfusionMatrix();
         con.setcmD(eval.trueNegatives().get(0),
@@ -107,6 +112,7 @@ public class DL4JNLP {
         System.out.println(eval.stats());
         accuracy = eval.accuracy();
         net.save(new File(dataLocalPath, "NewsModel.net"), true);
+        System.out.println(net.summary());
     }
 
     private ArrayList<String> recordToArrayList(ArrayList<Record> recordList) {
@@ -133,8 +139,8 @@ public class DL4JNLP {
         }
         trainPositive = saveToArray(positive, 0, (int) (positive.size() * 0.7));
         trainNegative = saveToArray(negative, 0, (int) (negative.size() * 0.7));
-        testPositive = saveToArray(positive, (int) (positive.size() * 0.7) + 1, positive.size() - 1);
-        testNegative = saveToArray(negative, (int) (negative.size() * 0.7) + 1, negative.size() - 1);
+        testPositive = saveToArray(positive, (int) (positive.size() * 0.7), positive.size() - 1);
+        testNegative = saveToArray(negative, (int) (negative.size() * 0.7), negative.size() - 1);
         saveFile(trainPositive, true, true);
         saveFile(trainNegative, true, false);
         saveFile(testPositive, false, true);

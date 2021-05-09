@@ -4,7 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="sample.WelcomeController" alignment="CENTER">
+      fx:controller="sample.WelcomePage.WelcomeController" alignment="CENTER">
 
     <GridPane xmlns:fx="http://javafx.com/fxml">
         <ImageView fx:id="image_logoView" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">

@@ -1,4 +1,4 @@
-package sample;
+package sample.CoreNLP;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.neural.rnn.RNNCoreAnnotations;

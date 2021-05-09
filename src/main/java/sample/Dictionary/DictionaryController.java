@@ -1,4 +1,4 @@
-package sample;
+package sample.Dictionary;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LearningController {
+public class DictionaryController {
     public Button tab1_button_choose;
     @FXML
     private Label tab1_label_showText;
@@ -62,7 +62,7 @@ public class LearningController {
                 StandardCharsets.UTF_8)) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
+                String[] values = line.split(";");
                 listOfRecords.add(fillTheRecord(values, i));
                 i++;
             }

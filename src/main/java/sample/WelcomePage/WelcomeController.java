@@ -1,4 +1,4 @@
-package sample;
+package sample.WelcomePage;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -38,7 +38,7 @@ public class WelcomeController {
     public void init() throws IOException {
         lbl_welcome.setText("Witam w aplikacji!");
         lbl_welcome.setFont(new Font("Times New Roman", 22));
-        lbl_instructions.setText("Aplikacja powstała w ramach pracy \"Metody i narzędzia analizy sentymentu\"." +
+        lbl_instructions.setText("Aplikacja powstała w ramach pracy \"Narzędzie programowe do analizy\"." +
                 " \n\n•Metoda słownikowa znajduje się w zakładce \"Metoda słownikowa\"." +
                 " \n\n•Metody przetwarzania języka naturalnego Uniwersytetu Stanforda" +
                 " i przy pomocy sieci neuronowej znajdują się w zakładce \"Metody NLP\"." +

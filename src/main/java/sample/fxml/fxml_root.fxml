@@ -11,7 +11,10 @@
         <Tab fx:id="tab_learning" text="Metoda słownikowa">
             <fx:include fx:id="fxml_learning" source="fxml_learning.fxml"/>
         </Tab>
-        <Tab fx:id="tab_mlm" text="Metody NLP">
+        <Tab fx:id="tab_treebank" text="Metoda Sentiment Treebank">
+            <fx:include fx:id="fxml_core" source="fxml_core.fxml"/>
+        </Tab>
+        <Tab fx:id="tab_mlm" text="Sieć neuronowa">
             <fx:include fx:id="fxml_mlm" source="fxml_mlm.fxml"/>
         </Tab>
         <Tab fx:id="tab_testing" text="Testowanie">

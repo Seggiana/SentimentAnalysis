@@ -1,4 +1,4 @@
-package sample;
+package sample.Dictionary;
 
 import java.util.List;
 

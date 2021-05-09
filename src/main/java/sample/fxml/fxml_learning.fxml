@@ -7,7 +7,7 @@
 
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111"
-      fx:controller="sample.LearningController" alignment="CENTER">
+      fx:controller="sample.Dictionary.DictionaryController" alignment="CENTER">
     <GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
               styleClass="root">
         <Label fx:id="tab1_label_showText" text="Wybierz plik do przetestowania słowników" GridPane.columnIndex="0"

@@ -25,7 +25,7 @@ public class Main extends Application {
         primaryStage.setMinHeight(400);
         primaryStage.setMaxWidth(640);
         primaryStage.setMaxHeight(400);
-        primaryStage.setTitle("Sentiment Analysis");
+        primaryStage.setTitle("Analiza Sentymentu");
         primaryStage.show();
     }
 

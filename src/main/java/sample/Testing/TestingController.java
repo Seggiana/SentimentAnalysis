@@ -1,4 +1,4 @@
-package sample;
+package sample.Testing;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,6 +15,9 @@ import org.nd4j.linalg.dataset.DataSet;
 import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.indexing.INDArrayIndex;
 import org.nd4j.linalg.indexing.NDArrayIndex;
+import sample.CoreNLP.CoreNLP;
+import sample.Dictionary.Dictionary;
+import sample.Dictionary.Record;
 
 import java.io.*;
 import java.util.ArrayList;
