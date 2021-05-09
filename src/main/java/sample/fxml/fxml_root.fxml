@@ -15,7 +15,7 @@
             <fx:include fx:id="fxml_core" source="fxml_core.fxml"/>
         </Tab>
         <Tab fx:id="tab_mlm" text="Sieć neuronowa">
-            <fx:include fx:id="fxml_mlm" source="fxml_mlm.fxml"/>
+            <fx:include fx:id="fxml_mlm" source="fxml_dl4j.fxml"/>
         </Tab>
         <Tab fx:id="tab_testing" text="Testowanie">
             <fx:include fx:id="fxml_testing" source="fxml_testing.fxml"/>
