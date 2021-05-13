@@ -47,6 +47,20 @@ public class ConfusionMatrix {
         }
     }
 
+    public void setcmB(List<Record> listOfRecords) {
+        for (Record r : listOfRecords) {
+            if (r.getTextClass() == r.getPredictionBayes() && r.getTextClass()) {
+                cm[0][0]++;
+            } else if (r.getTextClass() == r.getPredictionBayes() && !r.getTextClass()) {
+                cm[1][1]++;
+            } else if (r.getTextClass() != r.getPredictionBayes() && r.getTextClass()) {
+                cm[0][1]++;
+            } else if (r.getTextClass() != r.getPredictionBayes() && !r.getTextClass()) {
+                cm[1][0]++;
+            }
+        }
+    }
+
     public void setcmD(int first, int second, int third, int fourth) {
         cm[0][0] = first;
         cm[0][1] = second;

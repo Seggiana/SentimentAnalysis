@@ -2,7 +2,6 @@ package sample.WelcomePage;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,10 +37,11 @@ public class WelcomeController {
     public void init() throws IOException {
         lbl_welcome.setText("Witam w aplikacji!");
         lbl_welcome.setFont(new Font("Times New Roman", 22));
-        lbl_instructions.setText("Aplikacja powstała w ramach pracy \"Narzędzie programowe do analizy\"." +
+        lbl_instructions.setText("Aplikacja powstała w ramach pracy \"Narzędzie programowe do analizy sentymentu\"." +
                 " \n\n•Metoda słownikowa znajduje się w zakładce \"Metoda słownikowa\"." +
-                " \n\n•Metody przetwarzania języka naturalnego Uniwersytetu Stanforda" +
-                " i przy pomocy sieci neuronowej znajdują się w zakładce \"Metody NLP\"." +
+                " \n\n•Metoda Sentiment Treebank znajduje się w zakładce \"Metoda Sentiment Treebank\"." +
+                " \n\n•Naiwny klasyfikator Bayesa znajduje się w zakładce \"Klasyfikator Bayesa \"." +
+                " \n\n•Metoda sieci neuronowej znajduje się w zakładce \"Sieć neuronowa \"." +
                 " \n\n•Testowanie metod dla własnego przykładu znajduje się w zakładce \"Testowanie\" ");
         lbl_instructions.setWrapText(true);
         lbl_instructions.setFont(new Font("Times New Roman", 14));

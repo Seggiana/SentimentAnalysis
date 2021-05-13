@@ -10,6 +10,7 @@ public class Record {
     private boolean predictionLexicon;
     private boolean predictionNLP;
     private boolean predictionDL4J;
+    private boolean predictionBayes;
     private boolean textClass;
     private String text;
 
@@ -63,6 +64,14 @@ public class Record {
 
     public void setPredictionDL4J(boolean predictionDL4J) {
         this.predictionDL4J = predictionDL4J;
+    }
+
+    public boolean getPredictionBayes() {
+        return predictionBayes;
+    }
+
+    public void setPredictionBayes(boolean predictionBayes) {
+        this.predictionBayes = predictionBayes;
     }
 
     public String getText() {

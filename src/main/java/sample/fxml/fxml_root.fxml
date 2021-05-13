@@ -1,7 +1,4 @@
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.Tab.*?>
-
-
 <TabPane fx:id="tabPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="sample.RootController" tabClosingPolicy="UNAVAILABLE">
     <tabs>
@@ -11,8 +8,11 @@
         <Tab fx:id="tab_learning" text="Metoda słownikowa">
             <fx:include fx:id="fxml_learning" source="fxml_learning.fxml"/>
         </Tab>
-        <Tab fx:id="tab_treebank" text="Metoda Sentiment Treebank">
+        <Tab fx:id="tab_treebank" text="Metoda RNTN">
             <fx:include fx:id="fxml_core" source="fxml_core.fxml"/>
+        </Tab>
+        <Tab fx:id="tab_bayes" text="Klasyfikator Bayesa">
+            <fx:include fx:id="fxml_bayes" source="fxml_bayes.fxml"/>
         </Tab>
         <Tab fx:id="tab_mlm" text="Sieć neuronowa">
             <fx:include fx:id="fxml_mlm" source="fxml_dl4j.fxml"/>

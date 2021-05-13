@@ -9,7 +9,9 @@ import javafx.stage.Stage;
 import sample.Dictionary.ConfusionMatrix;
 import sample.Dictionary.Record;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -52,7 +54,6 @@ public class DL4JController {
         csvToList(new File(absolutePath));
         for (Record r : recordList) {
             r.cleanText();
-            System.out.println(recordList.indexOf(r));
         }
     }
 

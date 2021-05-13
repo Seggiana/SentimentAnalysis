@@ -1,5 +1,6 @@
 package sample.Testing;
 
+import de.daslaboratorium.machinelearning.classifier.Classifier;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +20,10 @@ import sample.CoreNLP.CoreNLP;
 import sample.Dictionary.Dictionary;
 import sample.Dictionary.Record;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +35,8 @@ public class TestingController {
     @FXML
     public Label lbl_res_Stan;
     @FXML
+    public Label lbl_res_Bayes;
+    @FXML
     public Label lbl_res_DL4J;
     @FXML
     private Label lbl_result_AFINN;
@@ -38,6 +44,8 @@ public class TestingController {
     private Label lbl_result_Lexicon;
     @FXML
     private Label lbl_result_SNLP;
+    @FXML
+    private Label lbl_result_Bayes;
     @FXML
     private Label lbl_result_DL4J;
     @FXML
@@ -53,6 +61,7 @@ public class TestingController {
     private WordVectors word2Vectors;
     private TokenizerFactory tokenizerFactory;
     private MultiLayerNetwork net;
+    private Classifier<String, String> bayes;
 
     public void handleSubmit() throws IOException {
         lbl_result_AFINN.setText("---");
@@ -64,8 +73,9 @@ public class TestingController {
         r.setPredictionAFINN(dictionary.calculateValue(r.getWordList(), true));
         r.setPredictionLexicon(dictionary.calculateValue(r.getWordList(), false));
         CoreNLP.init();
+        r.setPredictionBayes(Boolean.parseBoolean(bayes.classify(r.getWordList()).getCategory()));
         r.setPredictionNLP(CoreNLP.findSentiment(r.getText()) >= 2);
-        testDL4J();
+        //testDL4J();
         printResults();
     }
 
@@ -74,6 +84,7 @@ public class TestingController {
         lbl_result_Lexicon.setText(r.getPredictionLexicon() ? "Positive" : "Negative");
         lbl_result_SNLP.setText(r.getPredictionNLP() ? "Positive" : "Negative");
         lbl_result_DL4J.setText(r.getPredictionDL4J() ? "Positive" : "Negative");
+        lbl_result_Bayes.setText(r.getPredictionDL4J() ? "Positive" : "Negative");
     }
 
     private void testDL4J() throws IOException {
@@ -162,6 +173,10 @@ public class TestingController {
         this.word2Vectors = word2Vectors;
     }
 
+    public void setBayes(Classifier<String, String> bayes) {
+        this.bayes = bayes;
+    }
+
     public void init() {
         Font font = new Font("Times New Roman", 14);
         lbl_result_AFINN.setFont(font);
@@ -175,5 +190,7 @@ public class TestingController {
         lbl_res_Lexi.setFont(font);
         lbl_res_Stan.setFont(font);
         lbl_res_DL4J.setFont(font);
+        lbl_res_Bayes.setFont(font);
+        lbl_result_Bayes.setFont(font);
     }
 }
