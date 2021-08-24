@@ -75,7 +75,7 @@ public class TestingController {
         CoreNLP.init();
         r.setPredictionBayes(Boolean.parseBoolean(bayes.classify(r.getWordList()).getCategory()));
         r.setPredictionNLP(CoreNLP.findSentiment(r.getText()) >= 2);
-        //testDL4J();
+        testDL4J();
         printResults();
     }
 
